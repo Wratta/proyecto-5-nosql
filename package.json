@@ -1,0 +1,30 @@
+{
+  "name": "proyecto_5_nosql",
+  "version": "1.0.0",
+  "description": "mi primer proyecto de scripting",
+  "keywords": [
+    "nosql",
+    "mongodb",
+    "prometeo",
+    "thepower"
+  ],
+  "homepage": "https://github.com/Wratta/proyecto-5-nosql#readme",
+  "bugs": {
+    "url": "https://github.com/Wratta/proyecto-5-nosql/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wratta/proyecto-5-nosql.git"
+  },
+  "license": "ISC",
+  "author": "Wratta",
+  "type": "commonjs",
+  "main": "express.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.9.3"
+  }
+}
