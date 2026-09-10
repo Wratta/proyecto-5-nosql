@@ -78,8 +78,59 @@ server.get('/movies/year/:year', async (req, res) => {
   }
 });
 
+// ---------------------------------------------------------------------
+// 6. CREAR UNA NUEVA PELÍCULA (POST)
+// ---------------------------------------------------------------------
+server.post('/movies', async (req, res) => {
+  try {
+    // Creamos una instancia del modelo Movie con los datos enviados en req.body
+    const newMovie = new Movie(req.body);
+    const savedMovie = await newMovie.save();
+    return res.status(201).json(savedMovie);
+  } catch (error) {
+    return res.status(400).json({ message: 'Error al crear la película', error: error.message });
+  }
+});
+
+// ---------------------------------------------------------------------
+// 7. ACTUALIZAR UNA PELÍCULA EXISTENTE (PUT)
+// ---------------------------------------------------------------------
+server.put('/movies/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    // findByIdAndUpdate recibe: id, datos a actualizar, y { new: true } para retornar el documento modificado
+    const updatedMovie = await Movie.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+    
+    if (!updatedMovie) {
+      return res.status(404).json({ message: 'No se encontró la película para actualizar' });
+    }
+    
+    return res.status(200).json(updatedMovie);
+  } catch (error) {
+    return res.status(400).json({ message: 'Error al actualizar la película', error: error.message });
+  }
+});
+
+// ---------------------------------------------------------------------
+// 8. ELIMINAR UNA PELÍCULA (DELETE)
+// ---------------------------------------------------------------------
+server.delete('/movies/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedMovie = await Movie.findByIdAndDelete(id);
+    
+    if (!deletedMovie) {
+      return res.status(404).json({ message: 'No se encontró la película a eliminar' });
+    }
+    
+    return res.status(200).json({ message: 'Película eliminada correctamente', movie: deletedMovie });
+  } catch (error) {
+    return res.status(500).json({ message: 'Error al eliminar la película', error: error.message });
+  }
+});
+
 // Manejo de rutas no encontradas (404)
-server.use('*', (req, res) => {
+server.use('/*path', (req, res) => {
   return res.status(404).json({ message: 'Ruta no encontrada' });
 });
 
