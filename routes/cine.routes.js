@@ -1,5 +1,5 @@
 const express = require('express');
-const Cine = require('../models/Cine');
+const Cine = require('../models/cine');
 
 const router = express.Router();
 

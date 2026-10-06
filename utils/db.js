@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const LINK_DB = 'mongodb://127.0.0.1:27017/proyecto_5_nosql';
+const LINK_DB = 'mongodb://localhost:3000/proyecto_5_nosql';
 
 const connect = async () => {
   try {
